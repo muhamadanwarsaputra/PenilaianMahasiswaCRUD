@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
 <?php include("config.php"); ?>
 
 <!DOCTYPE html>
@@ -29,7 +39,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Brand/logo -->
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="logo.jpg" alt="logo" style="width:40px;">
             BPPTIK KOMINFO
         </a>

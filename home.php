@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,25 +38,31 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Brand/logo -->
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="logo.jpg" alt="logo" style="width:40px;">
             BPPTIK KOMINFO
         </a>
     </nav>
 
+    <div class="page-header">
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+    </div>
 
-    <br>
+    <p>
+    <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+    <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    </p>
+
     <div class="container">
-        <h4>SKKNI BPPTIK</h4>
+        <h3>SKKNI BPPTIK</h3>
         <div class="card">
             <div class="card-body">
-                <h6>Menu<h6>
+                <h4>Menu<h4>
                         <nav>
                             <ul>
                                 <li><a href="form-input.php">Input Nilai</a></li>
                                 <li><a href="list-nilai.php">List Nilai</a></li>
                         </nav>
-
             </div>
         </div>
     </div>

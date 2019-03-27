@@ -1,4 +1,15 @@
 <?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
+<?php
 
 include("config.php");
 
@@ -50,7 +61,7 @@ if (mysqli_num_rows($query) < 1) {
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Brand/logo -->
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="logo.jpg" alt="logo" style="width:40px;">
             BPPTIK KOMINFO
         </a>
@@ -63,46 +74,39 @@ if (mysqli_num_rows($query) < 1) {
             <div class="card-body">
 
                 <form action="proses-edit.php" method="POST">
-
                     <fieldset>
-
                         <input type="hidden" name="id" value="<?php echo $nilai['id'] ?>" />
-
                         <p>
                             <label for="nama">Nama: </label>
-                            <input type="text" class="form-control" name="nama" value="<?php echo $nilai['nama'] ?>" placeholder="Nama Lengkap" />
+                            <input type="text" class="form-control" name="nama" value="<?php echo $nilai['nama'] ?>" placeholder="Nama Lengkap" required />
                         </p>
 
                         <p>
                             <label for="nilaiTugas">Nilai Tugas: </label>
-                            <input type="number" class="form-control" name="nilaiTugas" value="<?php echo $nilai['nilaiTugas'] ?>" placeholder="0-100" />
+                            <input type="number" class="form-control" name="nilaiTugas" value="<?php echo $nilai['nilaiTugas'] ?>" placeholder="0-100" required />
                         </p>
 
                         <p>
                             <label for="nilaiUts">Nilai UTS: </label>
-                            <input type="number" class="form-control" name="nilaiUts" value="<?php echo $nilai['nilaiUts'] ?>" placeholder="0-100" />
+                            <input type="number" class="form-control" name="nilaiUts" value="<?php echo $nilai['nilaiUts'] ?>" placeholder="0-100" required />
                         </p>
 
                         <p>
                             <label for="nilaiUas">Nilai UAS: </label>
-                            <input type="number" class="form-control" name="nilaiUas" value="<?php echo $nilai['nilaiUas'] ?>" placeholder="0-100" />
+                            <input type="number" class="form-control" name="nilaiUas" value="<?php echo $nilai['nilaiUas'] ?>" placeholder="0-100" required />
                         </p>
 
                         <p>
                             <label for="hasil">Grade: </label>
-                            <input type="text" class="form-control" name="hasil" value="<?php echo $nilai['hasil'] ?>" placeholder="Grade" />
+                            <input type="text" class="form-control" name="hasil" value="<?php echo $nilai['hasil'] ?>" placeholder="Grade" required />
                         </p>
 
                         <p>
                             <input type="submit" class="btn btn-primary" value="Update" name="input" />
                             <input type="button" class="btn btn-primary" value="Cancle" onclick="window.location.href='list-nilai.php'" />
                         </p>
-
                     </fieldset>
-
                 </form>
-
-
             </div>
         </div>
     </div>
